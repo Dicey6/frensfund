@@ -166,7 +166,7 @@ export default function ProfilePage() {
                         data-testid="button-save-profile"
                       >
                         {isUpdating ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                        {isUpdating ? 'Committing...' : 'Commit Changes'}
+                        {isUpdating ? 'Saving...' : 'Save Changes'}
                       </Button>
                     </div>
                   </form>

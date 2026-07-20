@@ -2,11 +2,12 @@ import React from 'react';
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNotifications } from '@/hooks/use-notifications';
+import { useTheme } from '@/contexts/ThemeContext';
 import { supabase } from '@/lib/supabase';
 import {
   LayoutDashboard, Target, BarChart3, Briefcase, ShoppingCart,
   Users, Bell, MessageCircle, User, Settings, LogOut, Menu, X,
-  Shield, ChevronRight, Lock
+  Shield, ChevronRight, Lock, Sun, Moon
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -197,7 +198,7 @@ function SidebarContent({
           onClick={handleLogout}
         >
           <LogOut className="w-3.5 h-3.5 mr-2" />
-          Disconnect
+          Log Out
         </Button>
       </div>
     </div>
@@ -209,6 +210,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const { profile } = useAuth();
   const { unreadCount } = useNotifications();
+  const { theme, toggleTheme } = useTheme();
   const [activeSection, setActiveSection] = React.useState<DashboardSection>('overview');
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
@@ -325,6 +327,13 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   <Shield className="w-3 h-3" /> Funded
                 </span>
               )}
+              <button
+                onClick={toggleTheme}
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/[0.06] dark:hover:bg-white/[0.06] light:hover:bg-black/[0.04] transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </button>
               <button
                 onClick={() => setActiveSection('notifications')}
                 className="relative w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/[0.06] transition-colors"

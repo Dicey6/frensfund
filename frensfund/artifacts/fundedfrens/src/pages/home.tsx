@@ -4,11 +4,12 @@ import {
   ArrowRight, Check, ChevronRight, Shield, Zap, TrendingUp,
   Users, Target, Award, BarChart3, Clock, Star, Menu, X,
   MessageCircle, Wallet, Bell, Activity, Lock, ExternalLink,
-  ChevronDown, Globe, Bot, LineChart, RefreshCw, Copy
+  ChevronDown, Globe, Bot, LineChart, RefreshCw, Copy, Sun, Moon
 } from 'lucide-react';
 import { useState } from 'react';
 import { CHALLENGE_PLANS } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -95,6 +96,7 @@ const faqs = [
 export default function HomePage() {
   const [navOpen, setNavOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -119,8 +121,15 @@ export default function HomePage() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-black/[0.05] transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
             <Link href="/login">
-              <Button variant="ghost" className="font-sans text-sm text-muted-foreground hover:text-foreground">Login</Button>
+              <Button variant="ghost" className="font-sans text-sm text-muted-foreground hover:text-foreground">Log In</Button>
             </Link>
             <Link href="/signup">
               <Button className="font-sans text-sm font-semibold px-5 shadow-[0_0_20px_rgba(139,92,246,0.3)]">

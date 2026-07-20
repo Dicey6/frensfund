@@ -50,7 +50,7 @@ export default function Login() {
   };
 
   return (
-    <AuthLayout title="Welcome back" subtitle="Enter your credentials to access your terminal.">
+    <AuthLayout title="Welcome back" subtitle="Enter your email and password to continue.">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -61,7 +61,7 @@ export default function Login() {
                 <FormLabel className="text-xs uppercase tracking-wider text-muted-foreground font-mono">Email Address</FormLabel>
                 <FormControl>
                   <Input 
-                    placeholder="trader@example.com" 
+                    placeholder="you@example.com" 
                     {...field} 
                     className="bg-input/50 border-input font-mono"
                     data-testid="input-email"
@@ -97,7 +97,7 @@ export default function Login() {
           />
           <Button 
             type="submit" 
-            className="w-full font-mono uppercase tracking-wider font-semibold group relative overflow-hidden" 
+            className="w-full font-semibold group relative overflow-hidden" 
             disabled={isLoading}
             data-testid="button-login"
           >
@@ -105,7 +105,7 @@ export default function Login() {
               <Loader2 className="w-5 h-5 animate-spin" />
             ) : (
               <span className="relative z-10 flex items-center justify-center gap-2">
-                Initialize Session
+                Log In
               </span>
             )}
             <div className="absolute inset-0 bg-primary-foreground/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
@@ -114,7 +114,7 @@ export default function Login() {
           <p className="text-center text-sm text-muted-foreground mt-6">
             Don't have an account?{' '}
             <Link href="/signup" data-testid="link-signup">
-              <span className="text-primary hover:text-primary/80 transition-colors cursor-pointer font-medium">Request Access</span>
+              <span className="text-primary hover:text-primary/80 transition-colors cursor-pointer font-medium">Sign up for free</span>
             </Link>
           </p>
         </form>

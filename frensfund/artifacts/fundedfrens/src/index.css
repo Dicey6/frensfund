@@ -151,8 +151,64 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
+/* ── LIGHT THEME ─────────────────────────────────────────────────────────── */
+.light {
+  --button-outline: rgba(0, 0, 0, 0.1);
+  --badge-outline: rgba(0, 0, 0, 0.04);
+
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(0, 0, 0, 0.04);
+  --elevate-2: rgba(0, 0, 0, 0.08);
+
+  --background: 265 30% 97%;
+  --foreground: 265 20% 12%;
+
+  --border: 265 15% 85%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 265 20% 12%;
+  --card-border: 265 15% 88%;
+
+  --sidebar: 265 25% 95%;
+  --sidebar-foreground: 265 20% 12%;
+  --sidebar-border: 265 15% 85%;
+  --sidebar-primary: 265 75% 55%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 265 20% 88%;
+  --sidebar-accent-foreground: 265 20% 12%;
+  --sidebar-ring: 265 75% 55%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 265 20% 12%;
+  --popover-border: 265 15% 88%;
+
+  --primary: 265 75% 55%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 265 20% 90%;
+  --secondary-foreground: 265 20% 12%;
+
+  --muted: 265 15% 90%;
+  --muted-foreground: 265 10% 45%;
+
+  --accent: 290 75% 55%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 84% 55%;
+  --destructive-foreground: 0 0% 100%;
+
+  --input: 265 20% 88%;
+  --ring: 265 75% 55%;
+
+  --chart-1: 265 75% 55%;
+  --chart-2: 290 75% 55%;
+  --chart-3: 45 90% 45%;
+  --chart-4: 220 75% 55%;
+  --chart-5: 0 84% 55%;
+}
+
 .dark {
-  /* Same as above, ensure it falls back cleanly if toggled */
+  /* falls back to :root dark defaults */
 }
 
 @layer base {
@@ -171,6 +227,16 @@
     background-attachment: fixed;
   }
 
+  .light body, body.light {
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.03) 0%, transparent 50%),
+      linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    background-attachment: fixed;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-semibold tracking-tight;
   }
@@ -184,6 +250,7 @@
     pointer-events: none;
   }
 
+  /* ── Dark glass (default) ── */
   .glass {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(12px);
@@ -204,6 +271,26 @@
     border-color: rgba(255, 255, 255, 0.1);
     transform: translateY(-1px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* ── Light glass overrides ── */
+  .light .glass {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+  .light .glass-primary {
+    background: rgba(139, 92, 246, 0.07);
+    border-color: rgba(139, 92, 246, 0.22);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 0 20px rgba(139, 92, 246, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+  .light .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
   }
   .section-label {
     font-family: var(--app-font-mono);

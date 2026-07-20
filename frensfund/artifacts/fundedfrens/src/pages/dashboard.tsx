@@ -682,7 +682,7 @@ function ReferralsSection() {
 
 // ── NOTIFICATIONS SECTION ─────────────────────────────────────────────────────
 function NotificationsSection() {
-  const { notifications, markAsRead, markAllAsRead, unreadCount } = useNotifications();
+  const { notifications, isLoading, markAsRead, markAllAsRead, unreadCount } = useNotifications();
 
   return (
     <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 pb-10">
@@ -697,7 +697,12 @@ function NotificationsSection() {
 
       <motion.div variants={item}>
         <div className="glass rounded-xl overflow-hidden">
-          {notifications.length === 0 ? (
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center py-20 text-muted-foreground/40">
+              <div className="w-8 h-8 rounded-full border-2 border-primary/30 border-t-primary animate-spin mb-3" />
+              <p className="font-mono text-xs uppercase tracking-widest">Loading notifications...</p>
+            </div>
+          ) : notifications.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-muted-foreground/40">
               <BellRing className="w-10 h-10 mb-3 opacity-40" />
               <p className="font-mono text-xs uppercase tracking-widest">No notifications yet</p>

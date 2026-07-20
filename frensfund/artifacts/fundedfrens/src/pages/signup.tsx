@@ -85,7 +85,7 @@ export default function Signup() {
   }
 
   return (
-    <AuthLayout title="Create Account" subtitle="Join the elite network of funded traders.">
+    <AuthLayout title="Create your account" subtitle="Join thousands of traders on FundedFrens.">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
           <FormField
@@ -96,7 +96,7 @@ export default function Signup() {
                 <FormLabel className="text-xs uppercase tracking-wider text-muted-foreground font-mono">Email Address</FormLabel>
                 <FormControl>
                   <Input 
-                    placeholder="trader@example.com" 
+                    placeholder="you@example.com" 
                     {...field} 
                     className="bg-input/50 border-input font-mono"
                     data-testid="input-signup-email"
@@ -164,14 +164,14 @@ export default function Signup() {
           />
           <Button 
             type="submit" 
-            className="w-full font-mono uppercase tracking-wider font-semibold mt-4 group relative overflow-hidden" 
+            className="w-full font-semibold mt-4 group relative overflow-hidden" 
             disabled={isLoading}
             data-testid="button-signup"
           >
             {isLoading ? (
               <Loader2 className="w-5 h-5 animate-spin" />
             ) : (
-              <span className="relative z-10">Register Application</span>
+              <span className="relative z-10">Create Account</span>
             )}
             <div className="absolute inset-0 bg-primary-foreground/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
           </Button>
@@ -179,7 +179,7 @@ export default function Signup() {
           <p className="text-center text-sm text-muted-foreground mt-6">
             Already have an account?{' '}
             <Link href="/login" data-testid="link-login">
-              <span className="text-primary hover:text-primary/80 transition-colors cursor-pointer font-medium">Initialize Login</span>
+              <span className="text-primary hover:text-primary/80 transition-colors cursor-pointer font-medium">Log in</span>
             </Link>
           </p>
         </form>
