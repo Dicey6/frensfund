@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { Link } from 'wouter';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
-import { Loader2, MailCheck } from 'lucide-react';
+import { Loader2, MailCheck, Gift } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { AuthLayout } from '@/components/AuthLayout';
@@ -29,9 +29,11 @@ export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const refFromUrl = new URLSearchParams(window.location.search).get('ref')?.toUpperCase() ?? '';
+
   const form = useForm<SignupForm>({
     resolver: zodResolver(signupSchema),
-    defaultValues: { email: '', password: '', confirmPassword: '' },
+    defaultValues: { email: '', password: '', confirmPassword: '', referralCode: refFromUrl },
   });
 
   const onSubmit = async (data: SignupForm) => {
@@ -149,15 +151,27 @@ export default function Signup() {
             name="referralCode"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xs uppercase tracking-wider text-muted-foreground font-mono">Referral Code (Optional)</FormLabel>
+                <FormLabel className="text-xs uppercase tracking-wider text-muted-foreground font-mono flex items-center gap-1.5">
+                  Referral Code
+                  {!refFromUrl && <span className="normal-case font-sans font-normal">(Optional)</span>}
+                </FormLabel>
                 <FormControl>
-                  <Input 
-                    placeholder="e.g. FRIEND2024" 
-                    {...field} 
-                    className="bg-input/50 border-input font-mono"
-                    data-testid="input-signup-referral-code"
-                  />
+                  <div className="relative">
+                    {refFromUrl && (
+                      <Gift className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-primary pointer-events-none" />
+                    )}
+                    <Input
+                      placeholder="e.g. REF-XXXXXXXX"
+                      {...field}
+                      readOnly={!!refFromUrl}
+                      className={`bg-input/50 border-input font-mono ${refFromUrl ? 'pl-9 text-primary border-primary/40 bg-primary/5 cursor-default select-all' : ''}`}
+                      data-testid="input-signup-referral-code"
+                    />
+                  </div>
                 </FormControl>
+                {refFromUrl && (
+                  <p className="text-xs text-primary/70 mt-1">✓ Referral code applied automatically</p>
+                )}
                 <FormMessage />
               </FormItem>
             )}
